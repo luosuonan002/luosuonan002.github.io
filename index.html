@@ -1,129 +1,101 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang=en xmlns=http://www.w3.org/1999/html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SnVRPlayer | A simple VR player</title>
+<meta name="description" content="A simple VR player." />
+<meta name="keywords" content="SnVRPlayer, snvrplayer, vrplayer, player, image, picture, screenshot, graph, drawing, painting, 播放器, vr播放器, 图片, 照片, VR播放器, avplayer, 涂鸦, 画图, 画画, app, apps, 应用, iphone, ipad, universal, ios, touch, tap, moke, 墨客, applications, software, 软件, itunes, store, 应用商店, apple, 苹果, development, 开发, beautiful, 精美, user interface, 界面, graphics, 画面" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>全网VIP视频解析</title>
-    
-    <!-- Bootstrap -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
-    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style>
-	    .header{
-		    margin-top:10%;
-	    }
-	    .main{
-		    padding:10px 15%;
-	    }
-	    .footer{
-		    padding:10px 15%;
-	    }
-    </style>
+<link rel="icon" href="/images/favicon.png" type="image/png" />
+<link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
 <body>
-	<div class="container">
-	    <div class="header h1 text-center">
-		    <h1>全网VIP视频解析</h1>
-		    <small>选取解析API并输入视频地址即可免VIP播放</small>
-	    </div>
-	    <hr />
-	    <div class="main">
-			<form class="form-horizontal" method="post">
-			  <div class="form-group">
-			    <label for="api" class="col-sm-2 control-label">API地址</label>
-			    <div class="col-sm-10">
-				  <select id="api" name="api" class="form-control"></select>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="url" class="col-sm-2 control-label">视频地址</label>
-			    <div class="col-sm-10">
-			      <input type="url" class="form-control" id="url" name="url" placeholder="视频地址">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="button" id="play" class="btn btn-primary">解 析</button>
-			    </div>
-			  </div>
-			</form>
-			</div>
-			<hr />
-			
-	    <div class="main">
-			<h4>如播放地址失效，可重新设置API列表。<a href="https://bak.yantuz.cn:8000/466.html" target="_blank">API获取</a>/<a href="javascript:setDefault();">恢复默认</a></h4>
-			<div class="form-horizontal">
-				<div class="form-group">
-			    <label for="url" class="col-sm-2 control-label">API列表</label>
-			    <div class="col-sm-10">
-			      <textarea rows="10" id="apiList" class="form-control">https://api.okjx.cc:3389/jx.php?url=</textarea>
-			    </div>
-			  </div>
-	    	</div>
-	    </div>
-	    <div class="footer text-center">
-		    <p>技术支持：<a href="https://github.com/luosuonan002" target="_blank">西瓜站</a></p>
-	    </div>
-	</div>
-    
-    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script>
-	    function setApi(){
-		    $("#api").children().remove();
-			var apilist = $("#apiList").val().split(/\r?\n/);
-			for(var i=0;i<apilist.length;i++){
-				$("#api").append("<option>"+apilist[i]+"</option>");
-			}
-	    }
-		$("#apiList").blur(function(){
-			setApi();
-			$.cookie("apiList",$("#apiList").val());
-		});
-		$("#play").click(function(){
-			$api = $("#api").val();
-			$url = $("#url").val();
-			if($url == "" || $url == null || !/^http.*$/.test($url)){
-				alert('视频地址不正确！');
-				return;
-			}
-			if($url == "" || $url == null || !/^http.*=$/.test($api)){
-				alert('无效API！');
-				return;
-			}
-			window.open($api+$url);
-		});
-	    function init(){
-		    var ckapi = $.cookie("apiList");
-		    if(ckapi && ckapi != ""){
-			    $("#apiList").val(ckapi);
-		    }
-		    setApi();
-	    }
-	    init();
-      function setDefault(){
-        $.cookie("apiList","");
-        window.location.reload();
-      }
-    </script>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+<div id=top class=header>
+<div class="container content center-vertical">
+<div class="row center-vertical">
+<div class="col-xs-left col-md-left center-vertical no-left-padding">
+<div class=headline>
+<div class="title hidden-xs"><i>Welcome to</i></div>
+<img class=logo src=images/logo.png>
+<div class="text">The ultimate all-in-one image annotation app.</div>
+<a class=store-link href="https://itunes.apple.com/app/annotable/id1581297052?mt=8&uo=4&at=10l4RA"><img class=app-store-badge src=/images/app_store_badge.svg></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container inspiration">
+<div class=row>
+<div class="col-md-full text-center"><b>Annotate Images Like a Pro</b></div>
+</div>
+</div>
+<div class=list>
+<div class=item>
+<div class=container>
+<div class=row>
+<div class="col-xs-left col-md-left">
+<div class=feature-title><i>Rich set of common shapes</i></div>
+<div class=feature-text>Rectangles, ovals, lines and arrows.</div>
+</div>
+<div class="col-xs-left col-md-left"><img class="img-center" src=images/shapes.jpg></div>
+</div>
+</div>
+</div>
+<div class=item>
+<div class=container>
+<div class=row>
+<div class="col-xs-right col-md-right">
+<div class=feature-title><i>Awesome text tool</i></div>
+<div class=feature-text>5 styles, 5 pointers and all kinds of fonts.</div>
+</div>
+<div class="col-xs-right col-md-right"><img class="img-center" src=images/text.jpg></div>
+</div>
+</div>
+</div>
+<div class=item>
+<div class=container>
+<div class=row>
+<div class="col-xs-left col-md-left">
+<div class=feature-title><i>Cover it up</i></div>
+<div class=feature-text>Stylishly obscure private information with blur and 3 styles of pixelations.</div>
+</div>
+<div class="col-xs-left col-md-left"><img class="img-center" src=images/blur.jpg></div>
+</div>
+</div>
+</div>
+<div class=item>
+<div class=container>
+<div class=row>
+<div class="col-xs-right col-md-right">
+<div class=feature-title><i>Light it up</i></div>
+<div class=feature-text>Highlight some parts with spotlights.</div>
+</div>
+<div class="col-xs-right col-md-right"><img class="img-center" src=images/spotlight.jpg></div>
+</div>
+</div>
+</div>
+<div class=item>
+<div class=container>
+<div class=row>
+<div class="col-xs-left col-md-left">
+<div class=feature-title><i>Zoom in</i></div>
+<div class=feature-text>If you really want to focus on a particular spot use a loupe.</div>
+</div>
+<div class="col-xs-left col-md-left"><img class="img-center" src=images/loupe.jpg></div>
+</div>
+</div>
+</div>
+<div class=item>
+<div class=container>
+<div class=row>
+<div class="col-xs-right col-md-right">
+<div class=feature-title><i>Magical text highlighter</i></div>
+<div class=feature-text>Text on screenshots can be highlighted like using highlighters. It feels like magic.</div>
+</div>
+<div class="col-xs-right col-md-right"><img class="img-center" src=images/text_marker.jpg></div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>
